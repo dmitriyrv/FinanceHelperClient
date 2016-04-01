@@ -1,5 +1,9 @@
 package com.helper.finance.client.dto;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.Size;
 import java.util.Objects;
 /**
  * Created by dvasd on 01.04.2016.
@@ -7,9 +11,17 @@ import java.util.Objects;
 public class UserDto {
 
     private String id;
+
+    @Email @NotEmpty
     private String email;
+
+    @Size(min = 3, max = 30)
     private String firstName;
+
+    @Size(min = 3, max = 30)
     private String lastName;
+
+    @NotEmpty
     private String password;
     private boolean active;
 

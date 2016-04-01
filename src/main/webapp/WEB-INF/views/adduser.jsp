@@ -7,7 +7,7 @@
 </head>
 
 <body>
-<form:form action="/addUser" method="POST">
+<form:form action="addUser" method="POST">
     	<p>First Name: <form:input path="firstName" /></p>
         <p>Last Name: <form:input path="lastName" /></p>
         <p>E-Mail: <form:input path="email" /></p>
