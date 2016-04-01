@@ -2,7 +2,7 @@ package com.helper.finance.client.dto;
 
 import java.util.Objects;
 /**
- * Created by dvas on 01.04.2016.
+ * Created by dvasd on 01.04.2016.
  */
 public class UserDto {
 
