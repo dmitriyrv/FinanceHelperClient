@@ -1,4 +1,4 @@
-package com.helper.finance.client.dto;
+package com.helper.finance.client.form;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * Created by dvasd on 01.04.2016.
  */
-public class UserDto {
+public class UserForm {
 
     private String id;
 
@@ -25,10 +25,10 @@ public class UserDto {
     private String password;
     private boolean active;
 
-    public UserDto() {
+    public UserForm() {
     }
 
-    public UserDto(String id, String email, String firstName, String lastName, String password, boolean active) {
+    public UserForm(String id, String email, String firstName, String lastName, String password, boolean active) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
@@ -88,13 +88,13 @@ public class UserDto {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof UserDto)) return false;
-        UserDto userDto = (UserDto) o;
-        return Objects.equals(active, userDto.active) &&
-                Objects.equals(email, userDto.email) &&
-                Objects.equals(firstName, userDto.firstName) &&
-                Objects.equals(lastName, userDto.lastName) &&
-                Objects.equals(password, userDto.password);
+        if (!(o instanceof UserForm)) return false;
+        UserForm userForm = (UserForm) o;
+        return Objects.equals(active, userForm.active) &&
+                Objects.equals(email, userForm.email) &&
+                Objects.equals(firstName, userForm.firstName) &&
+                Objects.equals(lastName, userForm.lastName) &&
+                Objects.equals(password, userForm.password);
     }
 
     @Override
