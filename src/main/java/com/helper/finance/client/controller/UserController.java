@@ -20,14 +20,17 @@ import javax.validation.Valid;
 public class UserController {
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public ModelAndView user(){
-        return new ModelAndView("adduser", "command", new UserDto());
+    public String user(ModelMap modelMap) {
+
+        UserDto userDto = new UserDto();
+        modelMap.addAttribute("userDto", userDto);
+        return "adduser";
     }
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public String addUser(@Valid UserDto userDto, BindingResult result, ModelMap model){
+    public String addUser(@Valid UserDto userDto, BindingResult result, ModelMap model) {
 
-        if (result.hasErrors()){
+        if (result.hasErrors()) {
             return "adduser";
         }
 
