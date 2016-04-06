@@ -5,14 +5,14 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Size;
 import java.util.Objects;
+
 /**
  * Created by dvasd on 01.04.2016.
  */
 public class UserForm {
 
-    private String id;
-
-    @Email @NotEmpty
+    @Email
+    @NotEmpty
     private String email;
 
     @Size(min = 3, max = 30)
@@ -23,27 +23,19 @@ public class UserForm {
 
     @NotEmpty
     private String password;
-    private boolean active;
 
     public UserForm() {
     }
 
-    public UserForm(String id, String email, String firstName, String lastName, String password, boolean active) {
-        this.id = id;
+    public UserForm(String email, String firstName, String lastName, String password) {
+
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        this.active = active;
+
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getEmail() {
         return email;
@@ -77,28 +69,21 @@ public class UserForm {
         this.password = password;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof UserForm)) return false;
         UserForm userForm = (UserForm) o;
-        return Objects.equals(active, userForm.active) &&
+        return
                 Objects.equals(email, userForm.email) &&
-                Objects.equals(firstName, userForm.firstName) &&
-                Objects.equals(lastName, userForm.lastName) &&
-                Objects.equals(password, userForm.password);
+                        Objects.equals(firstName, userForm.firstName) &&
+                        Objects.equals(lastName, userForm.lastName) &&
+                        Objects.equals(password, userForm.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(email, firstName, lastName, password, active);
+        return Objects.hash(email, firstName, lastName, password);
     }
 }
