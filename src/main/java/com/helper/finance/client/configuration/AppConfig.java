@@ -1,5 +1,6 @@
 package com.helper.finance.client.configuration;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.dozer.DozerBeanMapper;
 import org.dozer.spring.DozerBeanMapperFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import java.util.List;
  * Created by dvas on 11.04.2016.
  */
 @Configuration
-public class DozerConfig {
+public class AppConfig {
 
     @Bean
     public DozerBeanMapperFactoryBean dozerBeanMapper() throws IOException {
@@ -33,5 +34,10 @@ public class DozerConfig {
         mappingFiles.add("classpath*:/dozer-bean-mappings.xml");
 
         return mappingFiles;
+    }
+
+    @Bean
+    public ObjectMapper jacksonMapper(){
+        return new ObjectMapper();
     }
 }

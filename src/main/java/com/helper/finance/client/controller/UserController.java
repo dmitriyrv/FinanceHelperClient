@@ -2,9 +2,8 @@ package com.helper.finance.client.controller;
 
 import com.helper.finance.client.dto.UserDto;
 import com.helper.finance.client.form.UserForm;
-import org.dozer.DozerBeanMapper;
+import com.helper.finance.client.service.UserService;
 import org.dozer.Mapper;
-import org.dozer.spring.DozerBeanMapperFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,10 +22,10 @@ import javax.validation.Valid;
 public class UserController {
 
     @Autowired
-    DozerBeanMapperFactoryBean dozerBeanMapperFactoryBean;
+    Mapper mapper;
 
     @Autowired
-    Mapper mapper;
+    UserService userService;
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public String user(ModelMap modelMap) {
@@ -43,12 +42,14 @@ public class UserController {
             return "adduser";
         }
 
-        mapper = dozerBeanMapperFactoryBean.getObject();
         UserDto userDto = new UserDto();
+        UserDto newUser = new UserDto();
 
         mapper.map(userForm, userDto, "user");
 
-        model.addAttribute("theObject", userDto.toString());
+        newUser = userService.createUser(userDto);
+
+        model.addAttribute("theObject", newUser.toString());
         return "creationsuccess";
 
     }

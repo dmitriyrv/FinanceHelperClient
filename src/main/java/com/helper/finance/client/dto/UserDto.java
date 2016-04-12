@@ -1,5 +1,7 @@
 package com.helper.finance.client.dto;
 
+import org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter;
+
 import java.util.Objects;
 
 /**
@@ -102,4 +104,7 @@ public class UserDto {
                 ", active=" + active +
                 '}';
     }
+
+
+
 }
