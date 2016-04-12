@@ -4,6 +4,7 @@ import com.helper.finance.client.dto.UserDto;
 import com.helper.finance.client.form.UserForm;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
+import org.dozer.spring.DozerBeanMapperFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,7 +23,10 @@ import javax.validation.Valid;
 public class UserController {
 
     @Autowired
-    DozerBeanMapper dozerBeanMapper;
+    DozerBeanMapperFactoryBean dozerBeanMapperFactoryBean;
+
+    @Autowired
+    Mapper mapper;
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public String user(ModelMap modelMap) {
@@ -33,13 +37,16 @@ public class UserController {
     }
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public String addUser(@Valid UserForm userForm, BindingResult result, ModelMap model) {
+    public String addUser(@Valid UserForm userForm, BindingResult result, ModelMap model) throws Exception {
 
         if (result.hasErrors()) {
             return "adduser";
         }
 
-        UserDto userDto = dozerBeanMapper.map(userForm, UserDto.class);
+        mapper = dozerBeanMapperFactoryBean.getObject();
+        UserDto userDto = new UserDto();
+
+        mapper.map(userForm, userDto, "user");
 
         model.addAttribute("theObject", userDto.toString());
         return "creationsuccess";

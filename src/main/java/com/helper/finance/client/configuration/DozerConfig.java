@@ -1,6 +1,7 @@
 package com.helper.finance.client.configuration;
 
 import org.dozer.DozerBeanMapper;
+import org.dozer.spring.DozerBeanMapperFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,14 +19,11 @@ import java.util.List;
 @Configuration
 public class DozerConfig {
 
-    @Autowired
-
-
     @Bean
-    public DozerBeanMapper dozerBeanMapper() throws IOException {
-        DozerBeanMapper dozerBeanMapper = new DozerBeanMapper();
-
-        dozerBeanMapper.setMappingFiles(listMappingFiles());
+    public DozerBeanMapperFactoryBean dozerBeanMapper() throws IOException {
+        DozerBeanMapperFactoryBean dozerBeanMapper = new DozerBeanMapperFactoryBean();
+        Resource[] resources = new PathMatchingResourcePatternResolver().getResources("classpath*:dozer-bean-mappings.xml");
+        dozerBeanMapper.setMappingFiles(resources);
         return dozerBeanMapper;
     }
 
