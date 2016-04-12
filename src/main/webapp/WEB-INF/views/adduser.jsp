@@ -16,7 +16,7 @@
 
     <div class="form-container">
 
-        <form:form action="addUser" method="POST" modelAttribute="userDto" class="form-horizontal">
+        <form:form action="addUser" method="POST" modelAttribute="userForm" class="form-horizontal">
 
             <div class="row">
                 <div class="form-group col-md-12">
