@@ -43,7 +43,7 @@ public class UserController {
         }
 
         UserDto userDto = new UserDto();
-        UserDto newUser = new UserDto();
+        UserDto newUser;
 
         mapper.map(userForm, userDto, "user");
 
