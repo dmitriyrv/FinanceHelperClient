@@ -31,15 +31,27 @@
         <dozer.version>5.5.1</dozer.version>
         <httpclient.version>4.5.2</httpclient.version>
         <jackson-mapper.version>1.9.13</jackson-mapper.version>
-        <!--<spring.security.version>4.0.4.RELEASE</spring.security.version>-->
+        <spring.security.version>4.0.4.RELEASE</spring.security.version>
     </properties>
 
     <dependencies>
-        <!--<dependency>
+        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
             <version>${spring.security.version}</version>
-        </dependency>-->
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+
+
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>

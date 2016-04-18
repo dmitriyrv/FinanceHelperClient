@@ -18,7 +18,7 @@ import javax.validation.Valid;
  */
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -27,7 +27,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public String user(ModelMap modelMap) {
 
         UserForm userForm = new UserForm();
