@@ -20,6 +20,8 @@ public class LoginController {
         return "login";
     }
 
+    @RequestMapping(path = "/auth", method = RequestMethod.POST)
+    public void authenticate(){
 
-
+    }
 }
