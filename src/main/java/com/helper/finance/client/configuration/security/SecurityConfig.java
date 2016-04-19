@@ -1,30 +1,61 @@
 package com.helper.finance.client.configuration.security;
 
+import com.helper.finance.client.service.impl.LoginDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+
 /**
  * Created by dvas on 15.04.2016.
- * Here we have hard-coded security config for research.
+ *
  */
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("admin@helper.com").password("admin").roles("ADMIN");
+    private LoginDetailsServiceImpl loginDetailsService;
+
+    @Autowired
+    public void registerGlobalAuthentification(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(loginDetailsService).passwordEncoder(getShaPasswordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/user").access("hasRole('ROLE_ADMIN')")
-                /*.and()
-                .formLogin().loginPage("/").failureUrl("/?error").usernameParameter("email").passwordParameter("password")*/;
+       http.csrf()
+               .disable()
+               .authorizeRequests()
+               .antMatchers("/resources/**", "/**").permitAll()
+               .anyRequest().permitAll()
+               .and();
+
+        http.formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/j_spring_security_check")
+                .failureUrl("/login?error")
+                .usernameParameter("j_username")
+                .passwordParameter("j_password")
+                .permitAll();
+
+        http.logout()
+                .permitAll()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout")
+                .invalidateHttpSession(true);
+    }
+
+    @Bean
+    public ShaPasswordEncoder getShaPasswordEncoder(){
+        return new ShaPasswordEncoder();
     }
 }

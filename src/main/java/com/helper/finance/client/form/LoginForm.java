@@ -8,12 +8,20 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class LoginForm {
 
-    @Email
+
     @NotEmpty
     private String email;
 
     @NotEmpty
     private String password;
+
+    public LoginForm(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public LoginForm() {
+    }
 
     public String getEmail() {
         return email;
