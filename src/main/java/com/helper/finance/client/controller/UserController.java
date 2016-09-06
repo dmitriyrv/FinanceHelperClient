@@ -5,6 +5,8 @@ import com.helper.finance.client.form.UserForm;
 import com.helper.finance.client.service.UserService;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -18,7 +20,8 @@ import javax.validation.Valid;
  */
 
 @Controller
-@RequestMapping("/user")
+//@PreAuthorize("hasRole('USER')")
+@RequestMapping("/")
 public class UserController {
 
     @Autowired
@@ -27,7 +30,8 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(method = RequestMethod.GET)
+   // @Secured({"USER"})
+    @RequestMapping(method = RequestMethod.GET, value = "/user")
     public String user(ModelMap modelMap) {
 
         UserForm userForm = new UserForm();
@@ -35,6 +39,7 @@ public class UserController {
         return "adduser";
     }
 
+   // @Secured({"USER"})
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     public String addUser(@Valid UserForm userForm, BindingResult result, ModelMap model) throws Exception {
 

@@ -37,7 +37,10 @@
             FH is a helper service to keep you money tracked.
         </p>
         <sec:authorize access="!isAuthenticated()">
-            <p><a class="btn btn-lg btn-success" href="<c:url value="/login" />" role="button">Login</a></p>
+            <p>
+            <a class="btn btn-lg btn-success" href="<c:url value="/login" />" role="button">Login</a>
+            <a class="btn btn-lg btn-success" href="<c:url value="/signup" />" role="button">Sing Up</a>
+            </p>
         </sec:authorize>
         <sec:authorize access="isAuthenticated()">
             <p>Your Login: <sec:authentication property="principal.username" /></p>

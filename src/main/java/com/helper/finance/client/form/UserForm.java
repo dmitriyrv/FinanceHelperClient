@@ -30,6 +30,7 @@ public class UserForm {
     public UserForm(String email, String firstName, String lastName, String password) {
 
         this.email = email;
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;

@@ -29,7 +29,7 @@ public class LoginDetailsServiceImpl implements UserDetailsService {
         LoginForm loginForm = loginService.getLogin("admin");
 
         Set<GrantedAuthority> roles = new HashSet<>();
-        roles.add(new SimpleGrantedAuthority(LoginRolesEnum.USER.name()));
+        roles.add(new SimpleGrantedAuthority("USER"));
 
         UserDetails userDetails = new User(loginForm.getEmail(),loginForm.getPassword(),roles);
 
